@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExecutionTests", "Execution
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkModel", "EntityFrameworkModel\EntityFrameworkModel.csproj", "{9815D764-C500-4376-AC12-6DC9966CBD6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.DemoData", "C:\Users\Public\Documents\DevExpress Demos 20.2\Components\Components\CS\Web.DemoData\Web.DemoData.csproj", "{B681C0F5-978D-45A0-A3B5-6D3860FD749D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXWebApplication1", "DXWebApplication1\DXWebApplication1.csproj", "{1C676BEE-D4EE-4E77-8AFE-3671E2F13880}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{9815D764-C500-4376-AC12-6DC9966CBD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9815D764-C500-4376-AC12-6DC9966CBD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9815D764-C500-4376-AC12-6DC9966CBD6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C676BEE-D4EE-4E77-8AFE-3671E2F13880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C676BEE-D4EE-4E77-8AFE-3671E2F13880}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C676BEE-D4EE-4E77-8AFE-3671E2F13880}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C676BEE-D4EE-4E77-8AFE-3671E2F13880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
