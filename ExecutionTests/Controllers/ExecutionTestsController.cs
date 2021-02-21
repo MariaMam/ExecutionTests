@@ -1,7 +1,5 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
-using DevExtreme.NETCore.Demos.Models.DataGrid;
-using DevExtreme.NETCore.Demos.Models.Northwind;
 using EntityFrameworkModel.Models;
 using ExecutionTests.Dtos;
 using Microsoft.AspNetCore.Http;
