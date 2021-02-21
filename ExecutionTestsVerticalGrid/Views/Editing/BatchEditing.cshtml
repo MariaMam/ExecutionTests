@@ -1,0 +1,46 @@
+﻿@model IEnumerable
+@{ DemoHelper.Instance.ControlAreaMaxWidth = Unit.Percentage(100); }
+@section StartDemoRegion {
+    @{ Html.BeginForm(); }
+}
+@section DemoOptionsTop {
+    <script type="text/javascript">
+            MVCxClientGlobalEvents.AddControlsInitializedEventHandler(AttachEditorValueChangedEvent);
+
+            function AttachEditorValueChangedEvent() {
+                var demoOptionNames = ["StartEditAction", "HighlightDeletedRecords"];
+                $.each(demoOptionNames, function (i, name) {
+                    var editor = ASPxClientControl.GetControlCollection().GetByName(name);
+                    editor.ValueChanged.AddHandler(OnChangeDemoOptions);
+                });
+            }
+            function OnChangeDemoOptions() {
+                VerticalGrid.PerformCallback();
+            }
+            function OnBeginGridCallback(s, e) {
+                e.customArgs = MVCxClientUtils.GetSerializedEditorValuesInContainer("options");
+            }
+    </script>
+    <div id="options" class="options">
+        <div class="options-item">
+            @Html.DevExpress().ComboBox(s => {
+               s.Name = "StartEditAction";
+               s.Properties.Caption = "Start edit action:";
+               s.Theme = "MaterialCompactOrange";
+               s.Properties.ValueType = typeof(GridViewBatchStartEditAction);
+           }).BindList(Enum.GetNames(typeof(GridViewBatchStartEditAction))).Bind(BatchEditingDemoHelper.Options.StartEditAction).GetHtml()
+        </div>
+        <div class="options-item">
+            @Html.DevExpress().CheckBox(s => {
+               s.Name = "HighlightDeletedRecords";
+               s.Text = "Highlight deleted records";
+               s.Theme = "MaterialCompactOrange";
+           }).Bind(BatchEditingDemoHelper.Options.HighlightDeletedRecords).GetHtml()
+        </div>
+    </div>
+}
+@Html.Partial("BatchEditingPartial", Model)
+
+@section EndDemoRegion {
+    @{ Html.EndForm(); }
+}

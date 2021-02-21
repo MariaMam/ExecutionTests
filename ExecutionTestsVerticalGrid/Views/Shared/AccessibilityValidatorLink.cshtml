@@ -1,0 +1,11 @@
+﻿@if (Utils.IsSiteMode) {
+    <div style="margin-top: 36px; margin-right: 2px; float: right;">
+        @Html.DevExpress().HyperLink(settings => {
+            settings.Name = "hlValidateWAVE";
+            settings.Properties.Target = "_blank";
+            settings.Properties.Text = "Validate with WAVE";
+            settings.Properties.ImageUrl = "~/Content/WAVE.png";
+            settings.NavigateUrl = "http://wave.webaim.org/report?url=" + Request.Url.AbsoluteUri;
+        }).GetHtml()
+    </div>
+}

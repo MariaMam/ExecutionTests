@@ -1,0 +1,45 @@
+﻿@(Html.DevExpress().VerticalGrid<Home>(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "Appearance", Action = "ConditionalFormattingPartial" };
+
+    settings.Width = Unit.Percentage(100);
+    settings.Settings.HeaderAreaWidth = 150;
+    settings.Settings.RecordWidth = 220;
+
+    settings.Settings.ShowCategoryIndents = false;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.Rows.Add(m => m.PhotoUrl, r => {
+        r.Caption = "Photo";
+        r.EditorProperties().Image(p => {
+            p.ImageWidth = 200;
+            p.ImageHeight = 132;
+        });
+    });
+    settings.Rows.Add(m => m.Price).PropertiesEdit.DisplayFormatString = "c";
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Information";
+        c.Rows.Add(m => m.Address).Settings.AllowSort = DefaultBoolean.False;
+        c.Rows.Add(m => m.Status);    
+    });
+    
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Features";
+        c.Rows.Add(m => m.Baths);
+        c.Rows.Add(m => m.Beds);
+        c.Rows.Add(m => m.HouseSize);
+    });
+    
+    settings.FormatConditions.AddTopBottom(m => m.Price, GridTopBottomRule.BottomItems, GridConditionHighlightFormat.BoldText);
+    settings.FormatConditions.AddTopBottom(m => m.Price, GridTopBottomRule.BottomItems, GridConditionHighlightFormat.GreenText);
+    settings.FormatConditions.AddTopBottom(m => m.Price, GridTopBottomRule.TopItems, GridConditionHighlightFormat.BoldText);
+    settings.FormatConditions.AddTopBottom(m => m.Price, GridTopBottomRule.TopItems, GridConditionHighlightFormat.RedText);
+
+    settings.FormatConditions.AddIconSet(m => m.Baths, GridConditionIconSetFormat.Arrows3Colored);
+    settings.FormatConditions.AddIconSet(m => m.Beds, GridConditionIconSetFormat.Arrows3Colored);
+
+    settings.FormatConditions.AddTopBottom(m => m.HouseSize, GridTopBottomRule.TopItems, GridConditionHighlightFormat.GreenText).Threshold = 5;
+    settings.FormatConditions.AddTopBottom(m => m.HouseSize, GridTopBottomRule.BottomItems, GridConditionHighlightFormat.RedText).Threshold = 5;
+
+}).Bind(Model).GetHtml())

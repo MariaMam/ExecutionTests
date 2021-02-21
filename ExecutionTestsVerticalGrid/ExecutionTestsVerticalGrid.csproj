@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevExpress.Web.Demos</RootNamespace>
+    <AssemblyName>DevExpress.Web.Demos.MVCxVerticalGridDemos</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxThemes.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.Mvc5.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.SpellChecker.v20.2.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v20.2.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v20.2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoReports.v20.2, Version=20.2.0.0, Culture=neutral, PublicKeyToken=79868b8147b5eae4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>
+      </HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Helpers\BatchEditingHelper.cs" />
+    <Compile Include="Code\Helpers\CategoriesHelper.cs" />
+    <Compile Include="Code\Helpers\FixedRowsHelper.cs" />
+    <Compile Include="Code\Helpers\FilterBuilderHelper.cs" />
+    <Compile Include="Code\Helpers\PagerHelper.cs" />
+    <Compile Include="Code\Helpers\ScrollingHelper.cs" />
+    <Compile Include="Controllers\AccessibilityController.cs" />
+    <Compile Include="Controllers\Accessibility\AccessibilityController.Compliance.cs" />
+    <Compile Include="Controllers\AppearanceController.cs" />
+    <Compile Include="Controllers\CustomizationController.cs" />
+    <Compile Include="Controllers\Customization\CustomizationController.Toolbar.cs" />
+    <Compile Include="Controllers\ExportingController.cs" />
+    <Compile Include="Controllers\GridRowsController.cs" />
+    <Compile Include="Controllers\GridRows\GridRowsController.Categories.cs" />
+    <Compile Include="Controllers\GridRows\GridRowsController.FixedRows.cs" />
+    <Compile Include="Controllers\DataShapingController.cs" />
+    <Compile Include="Controllers\DataShaping\DataShapingController.TotalSummary.cs" />
+    <Compile Include="Controllers\DataShaping\DataShapingController.LargeDatabase.cs" />
+    <Compile Include="Controllers\DbGenController.cs" />
+    <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\EditingController.cs" />
+    <Compile Include="Controllers\FilteringAndSortingController.cs" />
+    <Compile Include="Controllers\FilteringAndSorting\FilteringAndSortingController.FilterBuilder.cs" />
+    <Compile Include="Controllers\FilteringAndSorting\FilteringAndSortingController.HeaderFilter.cs" />
+    <Compile Include="Controllers\FilteringAndSorting\FilteringAndSortingController.SearchPanel.cs" />
+    <Compile Include="Controllers\FilteringAndSorting\FilteringAndSortingController.Sorting.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OverviewController.cs" />
+    <Compile Include="Controllers\PagingAndScrollingController.cs" />
+    <Compile Include="Controllers\PagingAndScrolling\PagingAndScrollingController.PagerSettings.cs" />
+    <Compile Include="Controllers\PagingAndScrolling\PagingAndScrollingController.Scrolling.cs" />
+    <Compile Include="Controllers\SelectionController.cs" />
+    <Compile Include="Controllers\TemplatesController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HeadphoneCompareData.cs" />
+    <Compile Include="Models\Options\BatchEditingOptions.cs" />
+    <Compile Include="Models\Options\CategoriesOptions.cs" />
+    <Compile Include="Models\Options\FixedRowsOptions.cs" />
+    <Compile Include="Models\Options\ScrollingOptions.cs" />
+    <Compile Include="Models\Options\FilterBuilderOptions.cs" />
+    <Compile Include="Models\Options\PagerOptions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Headphones.xml" />
+    <Content Include="App_Data\Homes.xml" />
+    <Content Include="App_Data\LargeDatabase.mdf" />
+    <Content Include="App_Data\NWind.mdf" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="Content\DemoIcons\BatchEditing.png" />
+    <Content Include="Content\DemoIcons\Categories.png" />
+    <Content Include="Content\DemoIcons\ConditionalFormatting.png" />
+    <Content Include="Content\DemoIcons\HeaderFilter.png" />
+    <Content Include="Content\DemoIcons\Selection.png" />
+    <Content Include="Content\feedback.css" />
+    <Content Include="Content\FeedbackIcons\icon-cancel-hover.svg" />
+    <Content Include="Content\FeedbackIcons\icon-cancel.svg" />
+    <Content Include="Content\FeedbackIcons\icon-chat-hover.svg" />
+    <Content Include="Content\FeedbackIcons\icon-chat.svg" />
+    <Content Include="Content\FeedbackIcons\icon-thumb-down-hover.svg" />
+    <Content Include="Content\FeedbackIcons\icon-thumb-down.svg" />
+    <Content Include="Content\FeedbackIcons\icon-thumb-up-hover.svg" />
+    <Content Include="Content\FeedbackIcons\icon-thumb-up.svg" />
+    <Content Include="Content\VideoBanner.png" />
+    <Content Include="Content\WAVE.png" />
+    <Content Include="gulpfile.js" />
+    <Content Include="Scripts\Feedback.js" />
+    <Content Include="Scripts\FixedRowsOffset.js" />
+    <Content Include="Views\Accessibility\Compliance.cshtml" />
+    <Content Include="Views\Accessibility\CompliancePartial.cshtml" />
+    <Content Include="Views\Shared\SkipRepetitiveNavigationLinks.cshtml" />
+    <Content Include="Views\Shared\AccessibilityValidatorLink.cshtml" />
+    <Content Include="Views\Shared\ThemeParametersSelectorPartial.cshtml" />
+    <Content Include="Views\Shared\ErrorMessage.cshtml" />
+    <Content Include="Views\Customization\Toolbar.cshtml" />
+    <Content Include="Views\Customization\ToolbarPartial.cshtml" />
+    <Content Include="Content\Fonts\OpenSans-CondBold.woff" />
+    <Content Include="Content\Fonts\overpass-semibold.woff" />
+    <Content Include="Content\Site.scss" />
+    <Content Include="package.json" />
+    <Content Include="Views\GridRows\CategoriesOptionsPartial.cshtml" />
+    <Content Include="Views\Shared\FeedbackPanel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\1x1.gif" />
+    <Content Include="Content\CodeFormatter.css" />
+    <Content Include="Content\Components.css" />
+    <Content Include="Content\ComponentsSpriteImage.png" />
+    <Content Include="Content\Loading.gif" />
+    <Content Include="Content\Platform.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\sprite.css" />
+    <Content Include="Content\sprite.svg" />
+    <Content Include="Content\sprite.png" />
+    <Content Include="Content\VideoButton.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\Demo.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\FooterTextPartial.cshtml" />
+    <Content Include="Views\Shared\HeadPartial.cshtml" />
+    <Content Include="Views\Shared\NavigationPartial.cshtml" />
+    <Content Include="Views\Shared\SearchListPartial.cshtml" />
+    <Content Include="Views\Shared\SearchPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\ThemeSelectorPartial.cshtml" />
+    <Content Include="Views\Overview\Overview.cshtml" />
+    <Content Include="Views\Overview\OverviewPartial.cshtml" />
+    <Content Include="Views\DataShaping\LargeDatabase.cshtml" />
+    <Content Include="Views\DataShaping\LargeDatabasePartial.cshtml" />
+    <Content Include="Views\Shared\CreateDatabasePartial.cshtml" />
+    <Content Include="Content\Fonts\CustomFont0.woff" />
+    <Content Include="Content\Fonts\CustomFont1.woff" />
+    <Content Include="Content\Fonts\CustomFont2.woff" />
+    <Content Include="Views\Shared\DemoTabsPartial.cshtml" />
+    <Content Include="Views\DataShaping\PerformanceTestPartial.cshtml" />
+    <Content Include="Views\DataShaping\TotalSummaryPartial.cshtml" />
+    <Content Include="Views\DataShaping\TotalSummary.cshtml" />
+    <Content Include="Views\FilteringAndSorting\FilterBuilder.cshtml" />
+    <Content Include="Views\FilteringAndSorting\FilterBuilderPartial.cshtml" />
+    <Content Include="Views\FilteringAndSorting\HeaderFilter.cshtml" />
+    <Content Include="Views\FilteringAndSorting\HeaderFilterPartial.cshtml" />
+    <Content Include="Views\FilteringAndSorting\SearchPanel.cshtml" />
+    <Content Include="Views\FilteringAndSorting\SearchPanelPartial.cshtml" />
+    <Content Include="Views\FilteringAndSorting\Sorting.cshtml" />
+    <Content Include="Views\FilteringAndSorting\SortingPartial.cshtml" />
+    <Content Include="Views\Editing\BatchEditing.cshtml" />
+    <Content Include="Views\Editing\BatchEditingPartial.cshtml" />
+    <Content Include="Views\PagingAndScrolling\PagerOptionsPartial.cshtml" />
+    <Content Include="Views\PagingAndScrolling\PagerSettings.cshtml" />
+    <Content Include="Views\PagingAndScrolling\PagerSettingsPartial.cshtml" />
+    <Content Include="Views\PagingAndScrolling\Scrolling.cshtml" />
+    <Content Include="Views\PagingAndScrolling\ScrollingPartial.cshtml" />
+    <Content Include="Views\GridRows\Categories.cshtml" />
+    <Content Include="Views\GridRows\CategoriesPartial.cshtml" />
+    <Content Include="Views\GridRows\FixedRowsPartial.cshtml" />
+    <Content Include="Views\GridRows\FixedRows.cshtml" />
+    <Content Include="Views\Selection\Selection.cshtml" />
+    <Content Include="Views\Selection\SelectionPartial.cshtml" />
+    <Content Include="Views\Appearance\ConditionalFormatting.cshtml" />
+    <Content Include="Views\Appearance\ConditionalFormattingPartial.cshtml" />
+    <Content Include="Views\Templates\DataCell.cshtml" />
+    <Content Include="Views\Templates\DataCellPartial.cshtml" />
+    <Content Include="Views\Exporting\Exporting.cshtml" />
+    <Content Include="Views\Exporting\ExportingPartial.cshtml" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Public\Documents\DevExpress Demos 20.2\Components\Components\CS\Web.DemoData\Web.DemoData.csproj">
+      <Project>{b681c0f5-978d-45a0-a3b5-6d3860fd749d}</Project>
+      <Name>Web.DemoData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60461</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

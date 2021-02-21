@@ -1,0 +1,30 @@
+﻿@model CategoriesDemoOptions
+
+@Html.DevExpress().FormLayout(settings => {
+    settings.Name = "options";
+    settings.RequiredMarkDisplayMode = RequiredMarkMode.None;
+
+    settings.Items.AddGroupItem(g => {
+        g.Caption = "Options";
+
+        g.Items.Add(i => i.EnableRowExpandingAnimation);
+        g.Items.Add(i => i.AllowRowExpanding);
+        g.Items.Add(i => i.ShowCategoryIndents);
+        g.Items.Add(i => i.EnableCallbackMode);
+    });
+    DemoHelper.Instance.PrepareControlOptions(settings, new MvcControlOptionsSettings {
+        ColumnMinWidth = 350,
+        ColumnCountMode = RecalculateColumnCountMode.ChildGroups
+    });
+}).GetHtml()
+<div class="apply-button-container">
+    @Html.DevExpress().Button(s => {
+        s.Name = "ApplyButton";
+        s.Text = "Apply";
+        s.Theme = "MaterialCompactOrange";
+        s.UseSubmitBehavior = true;
+    }).GetHtml()
+</div>
+
+
+

@@ -1,0 +1,29 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "FilteringAndSorting", Action = "SearchPanelPartial" };
+    settings.SettingsSearchPanel.Visible = true;
+    settings.Width = Unit.Percentage(100);
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.RecordWidth = 200;
+    settings.Settings.HeaderAreaWidth = Utils.IsLargeTheme ? 210 : 150;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.Rows.Add("ContactName");
+    settings.Rows.Add("CompanyName");
+    settings.Rows.Add("Phone");
+    settings.Rows.Add(r => {
+        r.FieldName = "AddressInfo";
+        r.UnboundType = UnboundColumnType.String;
+        r.UnboundExpression = "[Address] + ', ' + [City]";
+
+        r.Rows.Add("Country");
+        r.Rows.Add("City");
+        r.Rows.Add("Address");
+        r.Rows.Add("PostalCode");
+    });
+
+    settings.PreRender = (sender, e) => {
+        var verticalGrid = (MVCxVerticalGrid)sender;
+        verticalGrid.SearchPanelFilter = "an";
+    };
+}).Bind(Model).GetHtml()

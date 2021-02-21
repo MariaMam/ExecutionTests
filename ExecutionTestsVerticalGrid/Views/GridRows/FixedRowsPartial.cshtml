@@ -1,0 +1,101 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "GridRows", Action = "FixedRowsPartial" };
+    settings.Width = Unit.Percentage(100);
+    
+    settings.Settings.ShowCategoryIndents = false;
+    settings.Settings.HeaderAreaWidth = 180;
+    settings.Settings.RecordWidth = Utils.IsLargeTheme ? 200 : 185;
+    settings.Settings.VerticalScrollBarMode = FixedRowsDemoHelper.Options.EnableVerticalScrolling ? ScrollBarMode.Visible : ScrollBarMode.Hidden;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.VerticalScrollableHeight = 600;
+    settings.Settings.ShowCategoryIndents = false;
+    settings.ClientSideEvents.Init = "onVerticalGridInit";
+    
+    settings.Rows.Add(r => {
+        r.FieldName = "PhotoUrl";
+        r.Caption = "Photo";
+        r.Fixed = FixedRowsDemoHelper.Options.EnableFixedRows;
+        r.EditorProperties().Image(p => p.ImageHeight = 180);
+    });
+
+    settings.Rows.Add(r => {
+        r.FieldName = "Brand";
+        r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+        r.Fixed = FixedRowsDemoHelper.Options.EnableFixedRows;
+    });
+    settings.Rows.Add(r => {
+        r.FieldName = "Model";
+        r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+        r.Fixed = FixedRowsDemoHelper.Options.EnableFixedRows;
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Reviews";
+        c.Rows.Add(r => {
+            r.FieldName = "Rating";
+            r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+            r.SetDataItemTemplateContent(container => {
+                ViewContext.Writer.Write(
+                    Html.DevExpress().RatingControl(rating => {
+                        rating.Name = "RatingControl" + container.ID;
+                        rating.ReadOnly = true;
+                    }).Bind(Convert.ToDecimal(container.Text)).GetHtml()
+                );
+            });
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "ReviewCount";
+            r.Caption = "Reviews";
+            r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+            r.EditorProperties().HyperLink(p => {
+                p.DisplayFormatString = "{0} reviews";
+                p.NavigateUrlFormatString = "javascript:void(0)";
+            });
+        });
+    });
+    
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Pricing";
+        c.Rows.Add("Price").PropertiesEdit.DisplayFormatString = "c";
+        c.Rows.Add(r => {
+            r.FieldName = "Discount";
+            r.RecordStyle.ForeColor = Color.Red;
+            r.PropertiesEdit.DisplayFormatString = "{0}%";
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "Total";
+            r.UnboundType = UnboundColumnType.Decimal;
+            r.UnboundExpression = "[Price]- [Price] * [Discount] / 100";
+            r.RecordStyle.Font.Bold = true;
+            r.PropertiesEdit.DisplayFormatString = "c";
+        });
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Specifications";
+        c.Rows.Add("Sensitivity", "Sensitivity, dB");
+        c.Rows.Add("MinFrequency", "Min Frequency, Hz");
+        c.Rows.Add("MaxFrequency", "Max Frequency, Hz");
+        c.Rows.Add("Power", "Power, MW");
+        c.Rows.Add("Impedance", "Impendance, ohms");
+        c.Rows.Add("Wireless", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("Bluetooth", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("SoundIsolating", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("WaterResistant", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("PhoneControl", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("InLineVolumeControl", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("CarryingCase", MVCxVerticalGridRowType.CheckBox);
+        c.Rows.Add("BuiltInMicrophone", MVCxVerticalGridRowType.CheckBox);
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Appearance";
+        c.Rows.Add("Fit").RecordStyle.HorizontalAlign = HorizontalAlign.Right;
+        c.Rows.Add("Height", "Height, in");
+        c.Rows.Add("Width", "Width, in");
+        c.Rows.Add("Depth", "Depth, in");
+        c.Rows.Add("Weight", "Weight, lbs");
+    });
+
+}).Bind(Model).GetHtml()

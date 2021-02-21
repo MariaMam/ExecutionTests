@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCxVerticalGridDemos", "MVCxVerticalGridDemos.csproj", "{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B681C0F5-978D-45A0-A3B5-6D3860FD749D} = {B681C0F5-978D-45A0-A3B5-6D3860FD749D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.DemoData", "..\..\..\Components\CS\Web.DemoData\Web.DemoData.csproj", "{B681C0F5-978D-45A0-A3B5-6D3860FD749D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9AB20A-0CAB-4C52-B465-F4A6C683DC0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B681C0F5-978D-45A0-A3B5-6D3860FD749D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A7A81FF-1607-48EA-B6B3-177FB4524A15}
+	EndGlobalSection
+EndGlobal

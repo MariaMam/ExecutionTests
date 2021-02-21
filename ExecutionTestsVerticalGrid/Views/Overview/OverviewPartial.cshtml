@@ -1,0 +1,39 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "Overview", Action = "OverviewPartial" };
+
+    settings.Settings.HeaderAreaWidth = Utils.IsLargeTheme ? 220 : 150;
+    settings.Settings.RecordWidth = Utils.IsLargeTheme ? 200 : 170;
+
+    var photoRow = settings.Rows.Add("Photo", MVCxVerticalGridRowType.BinaryImage);
+    photoRow.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+    photoRow.EditorProperties().BinaryImage(p => {
+        p.ImageHeight = 170;
+    });
+
+    settings.Rows.Add(r => {
+        r.FieldName = "PersonalInfo";
+        r.Caption = "Name";
+        r.UnboundType = UnboundColumnType.String;
+        r.UnboundExpression = "[TitleOfCourtesy] + ' ' + [FirstName] + ' ' + [LastName]";
+
+        r.Rows.Add("FirstName");
+        r.Rows.Add("LastName");
+        r.Rows.Add("BirthDate");
+        r.Rows.Add("HireDate");
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Address";
+        c.Rows.Add("Address");
+        c.Rows.Add("City");
+        c.Rows.Add("Country");
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Phone";
+        c.Rows.Add("HomePhone");
+        c.Rows.Add("Extension");
+    });
+    
+}).Bind(Model).GetHtml()

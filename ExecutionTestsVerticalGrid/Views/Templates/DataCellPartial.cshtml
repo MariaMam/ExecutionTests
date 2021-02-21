@@ -1,0 +1,32 @@
+﻿@{
+    string ProductTagFormat = "<span class='categoryProduct'>{0}</span>";
+}
+
+@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "Templates", Action = "DataCellPartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.Settings.HeaderAreaWidth = Utils.IsLargeTheme ? 140 : 120;
+    settings.Settings.RecordWidth = 260;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.Rows.Add(r => {
+        r.FieldName = "Picture";
+        r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+        r.EditorProperties().BinaryImage(p => p.ImageHeight = 150);
+    });
+
+    settings.Rows.Add("CategoryName");
+    settings.Rows.Add("Description");
+    settings.Rows.Add(r => {
+        r.Caption = "Products";
+        r.RecordStyle.VerticalAlign = VerticalAlign.Top;
+
+        r.SetDataItemTemplateContent(c => {
+            var productNames = (IEnumerable)DataBinder.Eval(c.DataItem, "ProductNames");
+            foreach(var productName in productNames)
+                ViewContext.Writer.Write(string.Format(ProductTagFormat, productName));
+        });
+    });
+}).Bind(Model).GetHtml()

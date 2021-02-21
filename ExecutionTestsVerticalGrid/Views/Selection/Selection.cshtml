@@ -1,0 +1,60 @@
+﻿@model IEnumerable
+<script type="text/javascript">
+	function OnRecordSelectionChanged(s, e) {
+		s.GetSelectedFieldValues("Model;Price", GetSelectedFieldValuesCallback);
+	}
+	function GetSelectedFieldValuesCallback(values) {
+		selectionList.BeginUpdate();
+		try {
+			selectionList.ClearItems();
+			for (var i = 0; i < values.length; i++) {
+				var item = values[i];
+				var texts = [item[0], '$' + item[1]];
+				selectionList.AddItem(texts);
+			}
+		} finally {
+			selectionList.EndUpdate();
+		}
+		selCount.SetText("Selected count: <b>" + VerticalGrid.GetSelectedRecordCount() + "</b>")
+	}
+</script>
+
+<table style="width:100%">
+	<tr>
+		<td style="width:78%">
+			<div style="float: left;width:100%;min-width:290px;padding-right:5px">
+				<div class="BottomPadding">
+					Click checkbox to select item:
+				</div>
+				@Html.Partial("SelectionPartial")
+			</div>
+		</td>
+		<td style="width:20%; vertical-align:top">
+			<div style="float: right;width:100%">
+				<div class="BottomPadding">
+					Selected values:
+				</div>
+				@Html.DevExpress().ListBox(
+				settings => {
+					settings.Name = "SelectionList";
+					settings.Height = 250;
+					settings.Properties.ClientInstanceName = "selectionList";
+					settings.Properties.Columns.Add("Model").Width = 80;
+					settings.Properties.Columns.Add("Price").Width = 40;
+					settings.Theme = "MaterialCompactOrange";
+				}).GetHtml()
+				<div class="TopPadding">
+					@Html.DevExpress().Label(
+					settings => {
+						settings.Name = "selCount";
+						settings.EncodeHtml = false;
+						settings.Text = "Selected count: <b>0</b>";
+						settings.Theme = "MaterialCompactOrange";
+						settings.Properties.EnableClientSideAPI = true;
+					}).GetHtml()
+				</div>
+			</div>
+
+		</td>
+	</tr>
+</table>

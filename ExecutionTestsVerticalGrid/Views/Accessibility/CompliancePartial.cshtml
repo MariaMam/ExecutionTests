@@ -1,0 +1,48 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "Accessibility", Action = "CompliancePartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.KeyFieldName = "ID";
+    settings.AccessibilityCompliant = true;
+    settings.Settings.HeaderAreaWidth = 100;
+    settings.Settings.RecordWidth = 200;
+    settings.SettingsPager.AllButton.Visible = true;
+    settings.SettingsPager.FirstPageButton.Visible = true;
+    settings.SettingsPager.LastPageButton.Visible = true;
+    settings.SettingsPager.PageSize = 4;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.CommandRow.Visible = true;
+    settings.CommandRow.ShowSelectCheckbox = true;
+    settings.Rows.Add(r => {
+        r.FieldName = "PhotoUrl";
+        r.Caption = "Photo";
+        r.EditorProperties().Image(p => p.ImageHeight = 180);
+    });
+    settings.Rows.Add("Brand").RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+    settings.Rows.Add("Model").RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+    settings.Rows.Add(r => {
+        r.FieldName = "Rating";
+        r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+        r.SetDataItemTemplateContent(c => {
+            Html.DevExpress().RatingControl(rating => {
+                rating.Name = "RatingControl" + c.ID;
+                rating.ReadOnly = true;
+                rating.AccessibilityCompliant = true;
+            }).Bind(Convert.ToDecimal(c.Text)).Render();
+        });
+    });
+    settings.Rows.Add("Price").PropertiesEdit.DisplayFormatString = "c";
+    settings.Rows.Add(r => {
+        r.FieldName = "Discount";
+        r.RecordStyle.ForeColor = Color.Red;
+        r.PropertiesEdit.DisplayFormatString = "{0}%";
+    });
+    settings.Rows.Add(r => {
+        r.FieldName = "Total";
+        r.UnboundType = UnboundColumnType.Decimal;
+        r.UnboundExpression = "[Price]- [Price] * [Discount] / 100";
+        r.RecordStyle.Font.Bold = true;
+        r.PropertiesEdit.DisplayFormatString = "c";
+    });
+}).Bind(Model).GetHtml()

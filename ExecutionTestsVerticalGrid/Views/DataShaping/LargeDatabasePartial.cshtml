@@ -1,0 +1,48 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "DataShaping", Action = "LargeDatabasePartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.Rows.Add(c => {
+        c.FieldName = "From";
+        c.RecordStyle.Font.Size = FontUnit.Large;
+        c.RecordStyle.Font.Bold = true;
+    });
+    settings.Rows.Add("Subject");
+    settings.Rows.Add(r => {
+        r.FieldName = "Size";
+    });
+    
+    settings.Rows.Add("Sent", MVCxVerticalGridRowType.DateEdit);
+
+    settings.Rows.Add(r => {
+        r.FieldName = "HasAttachment";
+        r.Caption = "Attachment?";
+        r.EditorProperties().CheckBox(p =>
+        {
+            p.DisplayImageChecked.IconID = DevExpress.Web.ASPxThemes.IconID.MailAttachment32x32;
+            p.DisplayImageChecked.ToolTip = "Has attachment";
+            p.DisplayImageUnchecked.IconID = DevExpress.Web.ASPxThemes.IconID.MailAttachmentobject32x32gray;
+            p.DisplayImageUnchecked.ToolTip = "Doesn't have attachment";
+        });
+    });
+    
+
+    settings.Settings.RecordWidth = 200;
+    settings.Settings.HeaderAreaWidth = Utils.IsLargeTheme ? 130 : 100;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+    settings.Styles.Record.HorizontalAlign = HorizontalAlign.Center;
+    settings.SettingsPager.PageSize = 10;
+    settings.SettingsPager.EnableAdaptivity = true;
+    
+    settings.ClientSideEvents.Init = "function(s, e) { s.PerformCallback(); }";
+    settings.ClientSideEvents.BeginCallback = "function(s, e) { OnStartCallback(s, e); }";
+    settings.ClientSideEvents.EndCallback = "function(s, e) { OnEndCallback(s, e); }";
+    
+    settings.CustomRowDisplayText = (s, e) => {
+        if(e.Row.FieldName == "Size")
+            e.DisplayText = Utils.FormatSize(e.Value);
+    };
+    
+}).BindToEF(typeof(LargeDatabaseContext), "Emails", (s, e) => {
+    e.KeyExpression = "ID";
+}).GetHtml()

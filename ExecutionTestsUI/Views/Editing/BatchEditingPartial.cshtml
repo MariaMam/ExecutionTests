@@ -1,0 +1,95 @@
+﻿@model IEnumerable<DevExpress.Web.Demos.Mvc.EditableProduct>
+
+@{
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+
+@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.KeyFieldName = "ProductID";
+    settings.CallbackRouteValues = new { Controller = "Editing", Action = "BatchEditingPartial" };
+    settings.Width = Unit.Percentage(100);
+    
+    settings.SettingsEditing.BatchUpdateRouteValues = new { Controller = "Editing", Action = "BatchEditingUpdateModel" };
+    settings.SettingsEditing.Mode = VerticalGridEditingMode.Batch;
+    settings.SettingsEditing.BatchEditSettings.StartEditAction = BatchEditingDemoHelper.Options.StartEditAction;
+    settings.SettingsEditing.BatchEditSettings.HighlightDeletedRecords = BatchEditingDemoHelper.Options.HighlightDeletedRecords;
+    
+    settings.SettingsBehavior.AllowRowExpanding = false;
+    settings.SettingsBehavior.AllowEllipsisInText = true;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.HeaderAreaWidth = Utils.IsLargeTheme ? 170 : 150;
+    settings.Settings.RecordWidth = 150;
+    settings.Settings.ShowCategoryIndents = false;
+    settings.SettingsPager.PageSize = 10;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.CommandRow.Visible = true;
+    settings.CommandRow.ShowNewButtonInHeader = true;
+    settings.CommandRow.ShowDeleteButton = true;
+    settings.CommandRow.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+    
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Product Info";
+        
+        c.Rows.Add(r => {
+            r.FieldName = "ProductName";
+            r.EditorProperties().TextBox(p => {
+                p.ValidationSettings.Display = Display.Dynamic;
+            });
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "CategoryID";
+            r.Caption = "Category Name";
+            r.EditorProperties().ComboBox(p => {
+                p.TextField = "CategoryName";
+                p.ValueField = "CategoryID";
+                p.ValueType = typeof(int);
+                p.DataSource = DevExpress.Web.Demos.Mvc.NorthwindDataProvider.GetCategories();
+                p.ValidationSettings.Display = Display.Dynamic;
+            });
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "SupplierID";
+            r.Caption = "Supplier";
+            r.EditorProperties().ComboBox(p => {
+                p.ValueType = typeof(int);
+                p.ValueField = "SupplierID";
+                p.TextField = "CompanyName";
+                p.DataSource = DevExpress.Web.Demos.Mvc.NorthwindDataProvider.GetSuppliers();
+            });
+        });
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Details";
+        c.Rows.Add("QuantityPerUnit");
+        c.Rows.Add(r => {
+            r.FieldName = "UnitPrice";
+            r.EditorProperties().SpinEdit(p => {
+                p.DisplayFormatString = "c";
+                p.DisplayFormatInEditMode = true;
+            });
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "UnitsInStock";
+            r.EditorProperties().SpinEdit(p => {
+                p.DisplayFormatInEditMode = true;
+            });
+        });
+        c.Rows.Add(r => {
+            r.FieldName = "Discontinued";
+            r.EditorProperties().CheckBox(p => {
+                p.AllowGrayed = true;
+                p.AllowGrayedByClick = false;
+            });
+        });
+    });
+
+    settings.CellEditorInitialize = (s, e) => {
+        ASPxEdit editor = (ASPxEdit)e.Editor;
+        editor.ValidationSettings.Display = Display.None;
+    };
+    settings.ClientSideEvents.BeginCallback = "OnBeginGridCallback";
+}).Bind(Model).GetHtml()

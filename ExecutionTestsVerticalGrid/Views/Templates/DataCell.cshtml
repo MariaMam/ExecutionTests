@@ -1,0 +1,16 @@
+﻿@model IEnumerable
+@{ DemoHelper.Instance.ControlAreaMaxWidth = Unit.Pixel(1506); }
+@section AdditionalResources{
+    <style type="text/css">
+        .categoryProduct {
+            background-color: #F0F0F0;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            padding: 4px;
+            display: inline-block;
+            border: 1px solid #ACACAC;
+        }
+    </style>
+}
+
+@Html.Partial("DataCellPartial", Model)

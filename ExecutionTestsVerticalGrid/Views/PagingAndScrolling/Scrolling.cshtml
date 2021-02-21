@@ -1,0 +1,37 @@
+﻿@model IEnumerable
+        
+@section StartDemoRegion {
+    @{ Html.BeginForm(); }
+}
+@section DemoOptionsTop {
+    <script type="text/javascript">
+        function Submit(s, e) {
+            $("form").submit();
+        }
+    </script>
+    <div class="options">
+        <div class="options-item">
+            @Html.DevExpress().ComboBox(s => {
+               s.Name = "HorizontalScrollBarMode";
+               s.Properties.Caption = "Vertical scrollBar mode:";
+               s.Theme = "MaterialCompactOrange";
+               s.Properties.ValueType = typeof(ScrollBarMode);
+               s.Properties.ClientSideEvents.SelectedIndexChanged = "Submit";
+           }).BindList(Enum.GetNames(typeof(ScrollBarMode))).Bind(ScrollingDemoHelper.Options.HorizontalScrollBarMode).GetHtml()
+        </div>
+        <div class="options-item">
+            @Html.DevExpress().ComboBox(s => {
+               s.Name = "VerticalScrollBarMode";
+               s.Properties.Caption = "Vertical scrollBar mode:";
+               s.Theme = "MaterialCompactOrange";
+               s.Properties.ValueType = typeof(ScrollBarMode);
+               s.Properties.ClientSideEvents.SelectedIndexChanged = "Submit";
+           }).BindList(Enum.GetNames(typeof(ScrollBarMode))).Bind(ScrollingDemoHelper.Options.VerticalScrollBarMode).GetHtml()
+        </div>
+    </div>
+}
+@Html.Partial("ScrollingPartial", Model)
+
+@section EndDemoRegion {
+    @{ Html.EndForm(); }
+}

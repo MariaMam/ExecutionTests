@@ -1,0 +1,38 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.Width = Unit.Percentage(100);
+    settings.CallbackRouteValues = new { Controller = "DataShaping", Action = "TotalSummaryPartial" };
+
+    settings.Rows.Add("ProductName");
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Company info";
+        c.Rows.Add("CompanyName");
+        c.Rows.Add("Address");
+        c.Rows.Add("Country");
+        c.Rows.Add("City");
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Pricing";
+        c.Rows.Add("UnitPrice", MVCxVerticalGridRowType.TextBox).PropertiesEdit.DisplayFormatString = "c";
+        c.Rows.Add("Quantity");
+        c.Rows.Add(r => {
+            r.FieldName = "Total";
+            r.UnboundType = UnboundColumnType.Decimal;
+            r.UnboundExpression = "UnitPrice * Quantity * (1 - Discount)";
+            r.PropertiesEdit.DisplayFormatString = "c";
+            r.RecordStyle.Font.Bold = true;
+        });
+    });
+
+    settings.SettingsBehavior.AllowRowExpanding = false;
+    settings.Settings.ShowSummaryPanel = true;
+    settings.Settings.HeaderAreaWidth = 150;
+    settings.Settings.RecordWidth = 150;
+    settings.Settings.ShowCategoryIndents = false;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+    settings.SettingsPager.PageSize = 10;
+    settings.SettingsPager.EnableAdaptivity = true;
+    
+    settings.TotalSummary.Add(SummaryItemType.Sum, "Total").ValueDisplayFormat = "<b>{0:c}</b>";
+}).Bind(Model).GetHtml()

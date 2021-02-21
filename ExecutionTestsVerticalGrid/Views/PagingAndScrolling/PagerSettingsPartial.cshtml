@@ -1,0 +1,39 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "PagingAndScrolling", Action = "PagerSettingsPartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.Settings.ShowCategoryIndents = false;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.HeaderAreaWidth = 150;
+    settings.Settings.RecordWidth = 200;
+    settings.SettingsBehavior.AllowRowExpanding = false;
+
+    settings.SettingsPager.Position = PagerDemoHelper.Options.Position;
+    settings.SettingsPager.ShowDisabledButtons = PagerDemoHelper.Options.ShowDisabledButtons;
+    settings.SettingsPager.ShowNumericButtons = PagerDemoHelper.Options.ShowNumericButtons;
+    settings.SettingsPager.ShowSeparators = PagerDemoHelper.Options.ShowSeparators;
+    settings.SettingsPager.Summary.Visible = PagerDemoHelper.Options.ShowSummary;
+    settings.SettingsPager.PageSizeItemSettings.Visible = PagerDemoHelper.Options.ShowPageSizeItem;
+    settings.SettingsPager.PageSizeItemSettings.Position = PagerDemoHelper.Options.PageSizeItemPosition;
+    settings.SettingsPager.EnableAdaptivity = true;
+
+    settings.Rows.Add("ProductName").RecordStyle.Font.Bold = true;
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Company info";
+        c.Rows.Add("CompanyName");
+        c.Rows.Add("Address");
+        c.Rows.Add("Country");
+        c.Rows.Add("City");
+    });
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Pricing";
+        c.Rows.Add("UnitPrice").PropertiesEdit.DisplayFormatString = "c";
+        c.Rows.Add("Quantity");
+        c.Rows.Add(r => {
+            r.FieldName = "Total";
+            r.UnboundType = UnboundColumnType.Decimal;
+            r.UnboundExpression = "UnitPrice * Quantity * (1 - Discount)";
+            r.PropertiesEdit.DisplayFormatString = "{0:c}";
+        });
+    });
+}).Bind(Model).GetHtml()

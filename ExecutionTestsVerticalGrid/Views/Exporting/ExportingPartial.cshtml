@@ -1,0 +1,49 @@
+﻿@Html.DevExpress().VerticalGrid(settings=> {
+    settings.Name = "VerticalGrid";
+    settings.Width = Unit.Percentage(100);
+    settings.CallbackRouteValues = new { Controller = "Exporting", Action = "ExportingPartial" };
+
+    settings.SettingsBehavior.AllowRowExpanding = false;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.RecordWidth = 250;
+    settings.Settings.ShowCategoryIndents = false;
+    settings.SettingsPager.EnableAdaptivity = true;
+    settings.SettingsExport.EnableClientSideExportAPI = true;
+
+    var c1 = settings.Rows.AddCategory("Product Info");
+    c1.Rows.Add("ProductName");
+    c1.Rows.Add("Category.CategoryName").Visible = false;
+    c1.Rows.Add(r => {
+        r.FieldName = "Category.Picture";
+        r.Caption = "Category";
+        r.EditorProperties().BinaryImage(p => {
+            p.ImageHeight = 150;
+            p.ExportImageSettings.Width = 240;
+            p.ExportImageSettings.Height = 150;
+            p.ToolTipField = "Category.CategoryName";
+        });
+    });
+    c1.Rows.Add("UnitPrice", MVCxVerticalGridRowType.SpinEdit).PropertiesEdit.DisplayFormatString = "c";
+    c1.Rows.Add("UnitsInStock");
+    c1.Rows.Add(r => {
+        r.FieldName = "Total";
+        r.UnboundType = UnboundColumnType.Decimal;
+        r.UnboundExpression = "UnitsInStock*UnitPrice";
+        r.PropertiesEdit.DisplayFormatString = "c";
+    });
+
+    var c2 = settings.Rows.AddCategory("Supplier Info");
+    c2.Rows.Add("Supplier.CompanyName");
+    c2.Rows.Add("Supplier.ContactName");
+    settings.Toolbars.Add(tb => {
+        tb.SettingsAdaptivity.Enabled = true;
+        tb.SettingsAdaptivity.EnableCollapseRootItemsToIcons = true;
+
+        tb.Items.Add(VerticalGridToolbarCommand.ExportToPdf);
+        tb.Items.Add(VerticalGridToolbarCommand.ExportToXls);
+        tb.Items.Add(VerticalGridToolbarCommand.ExportToXlsx);
+        tb.Items.Add(VerticalGridToolbarCommand.ExportToDocx);
+        tb.Items.Add(VerticalGridToolbarCommand.ExportToRtf);
+    });
+}).Bind(Model).GetHtml()
+  

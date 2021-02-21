@@ -1,0 +1,50 @@
+﻿@Html.DevExpress().VerticalGrid(settings => {
+	settings.Name = "VerticalGrid";
+	settings.CallbackRouteValues = new { Controller = "Selection", Action = "SelectionPartial" };
+	settings.Width = Unit.Percentage(100);
+	settings.KeyFieldName = "ID";
+	settings.ClientSideEvents.SelectionChanged = "OnRecordSelectionChanged";
+	settings.Settings.HeaderAreaWidth = 100;
+	settings.Settings.RecordWidth = 200;
+	settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+	settings.SettingsPager.PageSize = 10;
+	settings.SettingsPager.EnableAdaptivity = true;
+
+	settings.CommandRow.Visible = true;
+	settings.CommandRow.ShowSelectCheckbox = true;
+	settings.Rows.Add(r => {
+		r.FieldName = "PhotoUrl";
+		r.Caption = "Photo";
+		r.EditorProperties().Image(p => p.ImageHeight = 180);
+	});
+	settings.Rows.Add("Brand").RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+	settings.Rows.Add("Model").RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+	settings.Rows.Add(r => {
+		r.FieldName = "Rating";
+		r.RecordStyle.HorizontalAlign = HorizontalAlign.Center;
+		r.SetDataItemTemplateContent(c => {
+			Html.DevExpress().RatingControl(rating => {
+				rating.Name = "RatingControl" + c.ID;
+				rating.ReadOnly = true;
+			}).Bind(Convert.ToDecimal(c.Text)).Render();
+		});
+	});
+	settings.Rows.Add("Price").PropertiesEdit.DisplayFormatString = "c";
+	settings.Rows.Add(r => {
+		r.FieldName = "Discount";
+		r.RecordStyle.ForeColor = Color.Red;
+		r.PropertiesEdit.DisplayFormatString = "{0}%";
+	});
+	settings.Rows.Add(r => {
+		r.FieldName = "Total";
+		r.UnboundType = UnboundColumnType.Decimal;
+		r.UnboundExpression = "[Price]- [Price] * [Discount] / 100";
+		r.RecordStyle.Font.Bold = true;
+		r.PropertiesEdit.DisplayFormatString = "c";
+	});
+	settings.PreRender = (s, e) => {
+		var verticalGrid = (MVCxVerticalGrid)s;
+		verticalGrid.Selection.SelectRecord(1);
+		verticalGrid.Selection.SelectRecord(5);
+	};
+}).Bind(Model).GetHtml()

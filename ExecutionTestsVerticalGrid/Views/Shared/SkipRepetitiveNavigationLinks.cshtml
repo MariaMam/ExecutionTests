@@ -1,0 +1,12 @@
+﻿<div id="skipLinks" class="skipPanel dxAIFE">
+    @Html.DevExpress().HyperLink(settings => {
+        settings.Name = "skipToMainContentLink";
+        settings.Properties.Text = "Skip to Main Content";
+        settings.ControlStyle.Font.Size = FontUnit.Parse("350%");
+        settings.Theme = "Metropolis";
+        settings.NavigateUrl = "javascript:void(0);";
+        settings.Attributes["onclick"] = "DXDemo.focusMainElement();";
+        settings.Attributes["onfocus"] = "DXDemo.toggleSkipLinks();";
+        settings.Attributes["onblur"] = "DXDemo.toggleSkipLinks();";
+    }).GetHtml()
+</div>

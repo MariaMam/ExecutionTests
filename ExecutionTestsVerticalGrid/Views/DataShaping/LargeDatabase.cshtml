@@ -1,0 +1,7 @@
+﻿@{DemoHelper.Instance.ControlAreaMaxWidth = Unit.Percentage(100);}
+@if(!DatabaseGenerator.IsReady("GeneratedEmailTable")) {
+    @Html.Partial("CreateDatabasePartial", "GeneratedEmailTable")
+} else {
+    @Html.Partial("PerformanceTestPartial")
+    @Html.Partial("LargeDatabasePartial")
+}

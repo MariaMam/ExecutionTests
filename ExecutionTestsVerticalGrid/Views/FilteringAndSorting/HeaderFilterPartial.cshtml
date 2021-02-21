@@ -1,0 +1,100 @@
+﻿@{
+    var enableCheckedListMode = (bool)Session["EnableCheckedListMode"];
+}
+
+@Html.DevExpress().VerticalGrid(settings => {
+    settings.Name = "VerticalGrid";
+    settings.CallbackRouteValues = new { Controller = "FilteringAndSorting", Action = "HeaderFilterPartial" };
+    settings.Width = Unit.Percentage(100);
+    
+    settings.Settings.ShowHeaderFilterButton = true;
+    settings.SettingsPopup.HeaderFilter.MinWidth = 250;
+    settings.SettingsPopup.HeaderFilter.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.OnWindowInnerWidth;
+    settings.SettingsPopup.HeaderFilter.SettingsAdaptivity.SwitchAtWindowInnerWidth = 768;
+    settings.SettingsPopup.HeaderFilter.SettingsAdaptivity.MinHeight = 300;
+
+    var headerFilterMode = enableCheckedListMode ? GridHeaderFilterMode.CheckedList : GridHeaderFilterMode.List;
+
+    settings.Rows.Add(r => {
+        r.FieldName = "PhotoUrl";
+        r.Caption = "Photo";
+        r.Settings.AllowHeaderFilter = DefaultBoolean.False;
+        r.EditorProperties().Image(p => {
+            p.ImageHeight = 132;
+            p.ImageWidth = 200;
+        });
+    });
+
+    settings.Rows.Add(r => {
+        r.FieldName = "Price";
+        r.PropertiesEdit.DisplayFormatString = "c";
+        r.RecordStyle.Font.Bold = true;
+        r.SettingsHeaderFilter.Mode = headerFilterMode;
+    });
+
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Information";
+        c.Rows.Add(address => {
+            address.FieldName = "Address";
+            address.Settings.AllowSort = DefaultBoolean.False;
+            address.Settings.AllowHeaderFilter = DefaultBoolean.False;
+            address.SettingsHeaderFilter.Mode = headerFilterMode;
+        });
+        c.Rows.Add("Status").SettingsHeaderFilter.Mode = headerFilterMode;
+    });
+    
+    settings.Rows.AddCategory(c => {
+        c.Caption = "Features";
+        c.Rows.Add("Baths").SettingsHeaderFilter.Mode = headerFilterMode;
+        c.Rows.Add("Beds").SettingsHeaderFilter.Mode = headerFilterMode;
+        c.Rows.Add("HouseSize").SettingsHeaderFilter.Mode = headerFilterMode;
+    });
+    
+    settings.Settings.ShowHeaderFilterButton = true;
+    settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+    settings.Settings.HeaderAreaWidth = 150;
+    settings.Settings.RecordWidth = 220;
+    settings.Settings.ShowCategoryIndents = false;
+    settings.SettingsPager.EnableAdaptivity = true;
+    
+    settings.HeaderFilterFillItems = (s, e) => {
+        if(!CustomFilterItemsAccessor.ContainsKey(e.Row.FieldName))
+            return;
+
+        e.Values.Clear();
+        if(e.Row.SettingsHeaderFilter.Mode == GridHeaderFilterMode.List)
+            e.AddShowAll();
+        e.Values.AddRange(CustomFilterItemsAccessor[e.Row.FieldName]);
+    };
+}).Bind(Model).GetHtml()
+
+@functions {
+    IDictionary<string, IEnumerable<FilterValue>> CustomFilterItemsAccessor = new Dictionary<string, IEnumerable<FilterValue>> {
+        { "Price", GetPriceFilterItems() },
+        { "HouseSize", GetHouseSizeFilterItems() }
+    };
+    
+    static IEnumerable<FilterValue> GetPriceFilterItems(){
+        List<FilterValue> filterItems = new List<FilterValue>();
+        int step = 500000;
+        for(int i = 0; i < 4; i++) {
+            double start = step * i;
+            double end = start + step - 1;
+            filterItems.Add(new FilterValue(string.Format("from {0:c0} to {1:c0}", start, end), "", string.Format("[Price] >= {0} and [Price] <= {1}", start, end)));
+        }
+        filterItems.Add(new FilterValue(string.Format("> {0:c}", 2000000), "", "[Price] > 2000000"));
+        return filterItems;
+    }
+
+    static IEnumerable<FilterValue> GetHouseSizeFilterItems() {
+        List<FilterValue> filterItems = new List<FilterValue>();
+        int step = 5000;
+        for(int i = 0; i < 2; i++) {
+            double start = step * i;
+            double end = start + step - 1;
+            filterItems.Add(new FilterValue(string.Format("from {0} to {1}", start, end), "", string.Format("[HouseSize] >= {0} and [HouseSize] <= {1}", start, end)));
+        }
+        filterItems.Add(new FilterValue("> 10000", "", "[HouseSize] > 10000"));
+        return filterItems;
+    }
+}

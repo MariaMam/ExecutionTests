@@ -1,0 +1,12 @@
+﻿@model IEnumerable
+@{ DemoHelper.Instance.ControlAreaMaxWidth = Unit.Pixel(1516); }
+
+@using (Html.BeginForm()) {
+    @Html.Partial("ExportingPartial", Model)
+}
+
+<div class="Note">
+	<b>Note:</b>
+	If you export grouped data to RTF, be sure to open the resulting file with an editor that fully supports RTF, including tables. 
+    For instance, Microsoft WordPad does not support this feature, and thus the file may appear corrupt.
+</div>
