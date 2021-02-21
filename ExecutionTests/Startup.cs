@@ -1,4 +1,6 @@
 using EntityFrameworkModel.Models;
+using ExecutionTestsLogic.Repos;
+using ExecutionTestsLogic.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +29,9 @@ namespace ExecutionTests
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureDatabase(services);
+
+            services.AddScoped<IExecutionTestsLogicService, ExecutionTestsLogicService>();
+            services.AddScoped<IExecutionTestsRepository, ExecutionTestsRepository>();
 
             services.AddCors(options =>
             {

@@ -1,7 +1,8 @@
 ﻿using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using EntityFrameworkModel.Models;
-using ExecutionTests.Dtos;
+using ExecutionTestsLogic.Dtos;
+using ExecutionTestsLogic.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevExtreme.NETCore.Demos.Controllers.ApiControllers
 {
@@ -18,37 +20,32 @@ namespace DevExtreme.NETCore.Demos.Controllers.ApiControllers
     public class ExecutionTestsController : Controller
     {
         ExecutionTestsDBContext _dbContext;
+        IExecutionTestsLogicService _executionTestsLogicService;
 
-        public ExecutionTestsController(ExecutionTestsDBContext dbContext)
+        public ExecutionTestsController(ExecutionTestsDBContext dbContext, IExecutionTestsLogicService executionTestsLogicService)
         {
             _dbContext = dbContext;
+            _executionTestsLogicService = executionTestsLogicService;
         }
 
-       
+
         [HttpGet]
         public object GetExecutionTests(DataSourceLoadOptions loadOptions)
         {
-            var query = _dbContext.ExecutionTests.Include(e => e.Parameter).Include(e=>e.Periode);
-            var dtos = query.Select(e => new ExecutionTestsDto()
-            {
-                Id = e.Id,
-                ProductId = e.ProductId,
-                CategoryId = e.CategoryId,
-                ClimaticConditionId = e.ClimaticConditionId,
-                MeasureConditionId = e.MeasureConditionId,
-                PeriodeId = e.PeriodeId,
-                PeriodeDuration = e.PeriodeDuration,
-                PeriodeIdplusDuration = e.Periode.Name,
-                ParameterId = e.ParameterId,
-                ParameterPlausibilityCheck = e.ParameterPlausibilityCheck,
-                ParameterPlausibilityMin = e.ParameterPlausibilityMin,
-                ParameterPlausibilityMax = e.ParameterPlausibilityMax,
-                ExperimentResult = e.Parameter.SelectionSetId != null ? e.SelectedOptionItemId : e.TestValue,
-                SelectedOptionItemId = e.SelectedOptionItemId,
-                TestValue = e.TestValue
-            });
+            var dtos = _executionTestsLogicService.GetExecutionTests();
             var a = DataSourceLoader.Load(dtos, loadOptions);
             return a;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExecutionTestsPivot(DataSourceLoadOptions loadOptions)
+        {
+            var source = _executionTestsLogicService.GetExecutionTestsForPivot();
+
+            loadOptions.PrimaryKey = new[] { "Id" };
+            loadOptions.PaginateViaPrimaryKey = true;
+
+            return Json(await DataSourceLoader.LoadAsync(source, loadOptions));
         }
 
         [HttpPut]
@@ -75,7 +72,7 @@ namespace DevExtreme.NETCore.Demos.Controllers.ApiControllers
         {
             var dtos = _dbContext.ExecutionTests.Select(p => new PeriodDto()
             {
-                PeriodeIdplusDuration = p.PeriodeDuration.ToString() +" " +p.Periode.Name.ToString(),
+                PeriodeIdplusDuration = p.PeriodeDuration.ToString() + " " + p.Periode.Name.ToString(),
                 PeriodeId = p.PeriodeId
             }).Distinct();
             return DataSourceLoader.Load(dtos, loadOptions);
@@ -122,30 +119,9 @@ namespace DevExtreme.NETCore.Demos.Controllers.ApiControllers
         [HttpGet]
         public object GetSelectionSetOptionItems(DataSourceLoadOptions loadOptions)
         {
-            var dtos = _dbContext.SelectionSetOptionItems.Select(s =>
-            new SelectionSetOptionItemsDto(s.Id, s.ItemValue, s.ItemName, s.Description));
+            var lookup = _executionTestsLogicService.GetSelectionSetOptionItems();
+            return DataSourceLoader.Load(lookup, loadOptions);
 
-            var lookup = from i in _dbContext.SelectionSetOptionItems
-                         let textprep = (i.ItemValue != 0 ? i.ItemValue.ToString() : "") + " " + i.ItemName + (i.Description != null ? " (" + i.Description + ")" : "")
-                         let text = textprep.Trim() == "" ? "n.a" : textprep
-                         select new
-                         {
-                             Value = i.Id,
-                             Text = text
-                         };
-
-            try
-            {
-                var result = DataSourceLoader.Load(lookup, loadOptions);
-                return DataSourceLoader.Load(lookup, loadOptions);
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-            return DataSourceLoader.Load(dtos, loadOptions);
         }
     }
 

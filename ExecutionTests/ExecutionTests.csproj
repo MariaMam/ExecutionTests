@@ -9,7 +9,6 @@
     <PackageReference Include="DevExpress.AspNetCore.Core" Version="20.2.5" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.5" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.0" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\ExecutionTestsLogic.csproj" />
     <ProjectReference Include="..\EntityFrameworkModel\EntityFrameworkModel.csproj" />
   </ItemGroup>
 
