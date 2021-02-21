@@ -39,7 +39,8 @@ namespace ExecutionTests
                                   builder =>
                                   {
                                       builder.WithOrigins("http://localhost:4200",
-                                                          "https://localhost:4200")
+                                                          "https://localhost:4200",
+                                                          "https://executiontestsui.azurewebsites.net")
                                       .AllowCredentials()
                                       .AllowAnyMethod()
                                       .SetIsOriginAllowedToAllowWildcardSubdomains()
